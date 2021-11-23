@@ -1,8 +1,8 @@
 import './App.css';
-import Container from 'react-bootstrap/Container'
 import Navigation from './components/Navigation';
 import { Link, Routes, Route, Navigate } from 'react-router-dom'
 import OwnerHome from './components/OwnerHome';
+import WalkerHome from './components/WalkerHome';
 
 function App() {
   return (
@@ -13,6 +13,9 @@ function App() {
         {/* Routes will go here */}
         <Routes>
           <Route path='/owner' element={<OwnerHome />}>
+            {/* <Route path='/edit' element={<Edit />} /> */}
+          </Route>
+          <Route path='/walker' element={<WalkerHome />}>
             {/* <Route path='/edit' element={<Edit />} /> */}
           </Route>
         </Routes>
