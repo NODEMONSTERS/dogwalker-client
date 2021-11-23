@@ -8,9 +8,9 @@ const Navigation = () => {
     return (
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Container>
-          <Navbar.Brand>
+          {/* <Navbar.Brand>
             
-          </Navbar.Brand>
+          </Navbar.Brand> */}
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto justify-content-end">
@@ -23,3 +23,5 @@ const Navigation = () => {
 }
 
 export default Navigation
+
+// The NavBar Brand is in case we wanna add a Logo of some sort
