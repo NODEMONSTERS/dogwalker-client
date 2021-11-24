@@ -1,24 +1,30 @@
-import './App.css';
-import Navigation from './components/Navigation';
-import { Link, Routes, Route, Navigate } from 'react-router-dom'
-import OwnerHome from './components/OwnerHome';
-import WalkerHome from './components/WalkerHome';
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Navigation from "./components/Navigation";
+import { Link, Routes, Route, Navigate } from "react-router-dom";
+import OwnerHome from "./components/OwnerHome";
+import WalkerHome from "./components/WalkerHome";
+import Welcome from './components/Welcome'
+import Container from "react-bootstrap/Container";
+import {useState} from 'react'
 
 function App() {
+  const [username, setUsername] = useState()
+
   return (
     <div className="App">
       <header>
-        <Navigation />
+        <Navigation setUsername={setUsername}/>
       </header>
-        {/* Routes will go here */}
-        <Routes>
-          <Route path='/owner' element={<OwnerHome />}>
-            {/* <Route path='/edit' element={<Edit />} /> */}
-          </Route>
-          <Route path='/walker' element={<WalkerHome />}>
-            {/* <Route path='/edit' element={<Edit />} /> */}
-          </Route>
-        </Routes>
+      <Welcome />
+      <Routes>
+        <Route path="/owner" element={<OwnerHome />}>
+          {/* <Route path='/edit' element={<Edit />} /> */}
+        </Route>
+        <Route path="/walker" element={<WalkerHome />}>
+          {/* <Route path='/edit' element={<Edit />} /> */}
+        </Route>
+      </Routes>
     </div>
   );
 }
