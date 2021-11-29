@@ -1,16 +1,56 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState , useContext} from 'react';
+import { Link } from 'react-router-dom';
 
-import Container from "react-bootstrap/Container";
-import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Form from "react-bootstrap/Form";
+import Container from 'react-bootstrap/Container';
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form';
+import { userContext } from './userContext';
+import { Navigate } from 'react-router-dom';
 
 
 const Welcome = () => {
-  return (
+
+  const ownerLoginApiCall = 'http://localhost:4000/owner/login/';
+  
+  const [user, setUser] = useState({});
+
+	const [owner, setOwner] = useState({
+		username: '',
+		password: '',
+	});
+
+	 console.log(user)
+	//update the user's information
+	const handleChange = (event) => {
+		setOwner({ ...owner, [event.target.name]: event.target.value });
+	};
+
+	// submit login
+	const handleSubmit = (event) => {
+		event.preventDefault();
+			
+			fetch(ownerLoginApiCall, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(owner),
+			})
+				.then((res) => res.json())
+				.then((data) => {
+					console.log(data);
+					setUser(data);
+					
+					<Navigate to='/owner' />
+				})
+				.catch((e) => console.log(e));		
+	
+	};
+
+	return (
 		<Container>
 			<h1>Welcome to DogWalker</h1>
 			<h4>Please choose your portal to continue</h4>
@@ -23,24 +63,36 @@ const Welcome = () => {
 							<Form>
 								<Form.Group className='mb-3' controlId='formBasicEmail'>
 									<Form.Label>Email address</Form.Label>
-									<Form.Control type='email' placeholder='Enter email' />
-									<Form.Text className='text-muted'>
-										We'll never share your email with anyone else.
-									</Form.Text>
+									<Form.Control
+										type='email'
+										name='username'
+										value={owner.username}
+										placeholder='Enter email'
+                    onChange={handleChange}
+									/>
 								</Form.Group>
 
 								<Form.Group className='mb-3' controlId='formBasicPassword'>
 									<Form.Label>Password</Form.Label>
-									<Form.Control type='password' placeholder='Password' />
+									<Form.Control
+										type='password'
+										name='password'
+										value={owner.password}
+										placeholder='Password'
+                    onChange={handleChange}
+									/>
 								</Form.Group>
-								<Link to='/register/'>
-									<Button variant='primary' type='submit'>
-										Register
+
+								<Form.Group className='mb-3' controlId='formLogin'>
+									<Button variant='primary' type='submit' onClick={handleSubmit}>
+										Log In
 									</Button>
-								</Link>
-								<Button variant='primary' type='submit'>
-									Log In
-								</Button>
+								</Form.Group>
+								<Form.Group className='mb-3' controlId='formRegister'>
+									<Form.Text className='text-muted'>
+										No account? <Link to='/register/'>Register</Link> here
+									</Form.Text>
+								</Form.Group>
 							</Form>
 						</Card.Body>
 					</Card>
@@ -53,23 +105,22 @@ const Welcome = () => {
 								<Form.Group className='mb-3' controlId='formBasicEmail'>
 									<Form.Label>Email address</Form.Label>
 									<Form.Control type='email' placeholder='Enter email' />
-									<Form.Text className='text-muted'>
-										We'll never share your email with anyone else.
-									</Form.Text>
 								</Form.Group>
 
 								<Form.Group className='mb-3' controlId='formBasicPassword'>
 									<Form.Label>Password</Form.Label>
 									<Form.Control type='password' placeholder='Password' />
 								</Form.Group>
-								<Link to='/register/'>
+								<Form.Group className='mb-3' controlId='formLogin'>
 									<Button variant='primary' type='submit'>
-										Register
+										Log In
 									</Button>
-								</Link>
-								<Button variant='primary' type='submit'>
-									Log In
-								</Button>
+								</Form.Group>
+								<Form.Group className='mb-3' controlId='formRegister'>
+									<Form.Text className='text-muted'>
+										No account? <Link to='/register/'>Register</Link> here
+									</Form.Text>
+								</Form.Group>
 							</Form>
 						</Card.Body>
 					</Card>

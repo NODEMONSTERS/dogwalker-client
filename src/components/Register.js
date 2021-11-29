@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-// import { Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { useNavigate } from 'react-router';
 import { Form, Button } from 'react-bootstrap';
 
 const Register = () => {
-	const navigate = useNavigate();
+    const navigate = useNavigate();
 
 	const ownerApiCall = 'http://localhost:4000/owner/register/';
     const walkerApiCall = 'http://localhost:4000/walker/register/';
@@ -32,13 +32,17 @@ const Register = () => {
 
 	// submit registration
 	const handleSubmit = (event) => {
+
 		event.preventDefault();
+
+	
 		// if they are an owner
 		if (userType === 'owner') {
 			fetch(ownerApiCall, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
+					
 				},
 				body: JSON.stringify(user),
 			// }).then(() => {
@@ -48,7 +52,7 @@ const Register = () => {
 			.then((data) => {
 				// console.log(data.newOwner);
 				// return <Navigate to="/owner" owner={data.newOwner} />
-				// navigate("/")
+				<Navigate to='/' />
 			})
 			.catch(e => console.log(e));
 
@@ -69,12 +73,12 @@ const Register = () => {
             console.log("new walker created")
 		}
 
-        navigate("/")
+        
 	};
 
 	return (
 		<div>
-			<h1> Owner Registration</h1>
+			<h1> Registration</h1>
 			<Form onSubmit={handleSubmit}>
 				<Form.Group className='mb-3' controlId='formName'>
 					I am a....
@@ -126,6 +130,9 @@ const Register = () => {
 						value={user.email}
 						onChange={handleChange}
 					/>
+					<Form.Text className='text-muted'>
+						We'll never share your email with anyone else.
+					</Form.Text>
 				</Form.Group>
 
 				<Form.Group className='mb-3' controlId='formBasicPassword'>
