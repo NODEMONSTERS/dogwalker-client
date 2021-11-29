@@ -1,13 +1,18 @@
-import Col from 'react-bootstrap/Col'
+import Col from "react-bootstrap/Col";
+import Card from "react-bootstrap/Card";
+// import { propTypes } from "react-bootstrap/esm/Image";
 
-const Dog = () => {
+const Dog = (props) => {
+  return (
+    <Col>
+      <Card style={{ width: "15rem" }}>
+        <Card.Body id={"dog-card"}>
+          <img id={"dog-img"} src={props.dog.picture} alt={props.dog.name}/>
+          <Card.Title>{props.dog.name}</Card.Title>
+        </Card.Body>
+      </Card>
+    </Col>
+  );
+};
 
-    return(
-        <Col>Doggo placeholder</Col>
-    )
-}
-
-export default Dog
-
-{/* The plan is for this to be like single dog cards, or lists, or pictures, of the owners dogs
-That is why it is returning multiple Cols, and here we will also add in the handle functions for the dogs */}
+export default Dog;
