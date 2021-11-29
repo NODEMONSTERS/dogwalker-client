@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
+// import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { Form, Button } from 'react-bootstrap';
 
 const Register = () => {
+	const navigate = useNavigate();
+
 	const ownerApiCall = 'http://localhost:4000/owner/register/';
     const walkerApiCall = 'http://localhost:4000/walker/register/';
 
@@ -37,9 +41,17 @@ const Register = () => {
 					'Content-Type': 'application/json',
 				},
 				body: JSON.stringify(user),
-			}).then(() =>
-				setUser({ name: '', city: '', username: '', password: '' })
-			);
+			// }).then(() => {
+			// 	setUser({ name: '', city: '', username: '', password: '' })
+			// });
+			}).then((res) => res.json())
+			.then((data) => {
+				// console.log(data.newOwner);
+				// return <Navigate to="/owner" owner={data.newOwner} />
+				// navigate("/")
+			})
+			.catch(e => console.log(e));
+
             console.log( "new owner created")
 		}
 		// if they are a walker
@@ -57,7 +69,7 @@ const Register = () => {
             console.log("new walker created")
 		}
 
-        
+        navigate("/")
 	};
 
 	return (
