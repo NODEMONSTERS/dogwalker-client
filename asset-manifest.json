@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/dogwalker-client/static/css/main.afd7172b.chunk.css",
+    "main.js": "/dogwalker-client/static/js/main.48eb45cc.chunk.js",
+    "main.js.map": "/dogwalker-client/static/js/main.48eb45cc.chunk.js.map",
+    "runtime-main.js": "/dogwalker-client/static/js/runtime-main.42efcedc.js",
+    "runtime-main.js.map": "/dogwalker-client/static/js/runtime-main.42efcedc.js.map",
+    "static/css/2.383c0125.chunk.css": "/dogwalker-client/static/css/2.383c0125.chunk.css",
+    "static/js/2.429f3183.chunk.js": "/dogwalker-client/static/js/2.429f3183.chunk.js",
+    "static/js/2.429f3183.chunk.js.map": "/dogwalker-client/static/js/2.429f3183.chunk.js.map",
+    "index.html": "/dogwalker-client/index.html",
+    "static/css/2.383c0125.chunk.css.map": "/dogwalker-client/static/css/2.383c0125.chunk.css.map",
+    "static/css/main.afd7172b.chunk.css.map": "/dogwalker-client/static/css/main.afd7172b.chunk.css.map",
+    "static/js/2.429f3183.chunk.js.LICENSE.txt": "/dogwalker-client/static/js/2.429f3183.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.42efcedc.js",
+    "static/css/2.383c0125.chunk.css",
+    "static/js/2.429f3183.chunk.js",
+    "static/css/main.afd7172b.chunk.css",
+    "static/js/main.48eb45cc.chunk.js"
+  ]
+}
