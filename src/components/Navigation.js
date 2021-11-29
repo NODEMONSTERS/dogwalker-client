@@ -15,6 +15,7 @@ const Navigation = () => {
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto justify-content-end">
               <Nav.Item><Link to='/'>Home</Link></Nav.Item>
+              <Nav.Item><Link to='/team'>Meet the Team</Link></Nav.Item>
             </Nav>
           </Navbar.Collapse>
         </Container>
@@ -22,6 +23,6 @@ const Navigation = () => {
     )
 }
 
-export default Navigation
+export default Navigation;
 
 // The NavBar Brand is in case we wanna add a Logo of some sort
