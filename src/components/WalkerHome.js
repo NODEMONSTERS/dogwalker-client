@@ -28,7 +28,7 @@ const WalkerHome = (props) => {
 						return (
 							<Col>
 								<Card style={{ width: '10rem' }}>
-									<Card.Img variant='top' src='holder.js/100px180' />
+									<Card.Img variant='top' src={dog.picture} />
 									<Card.Body>
 										<Card.Title>Name: {dog.name}</Card.Title>
 										<Card.Text></Card.Text>
