@@ -46,7 +46,6 @@ const Register = () => {
 				.then((data) => {
 					console.log('new owner created');
 				})
-				.catch((e) => console.log(e));
 			navigate('/');
 		}
 		// if they are a walker
