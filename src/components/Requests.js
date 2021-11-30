@@ -3,11 +3,13 @@ import Container from 'react-bootstrap/Container'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 
-const Requests = () => {
+const Requests = (props) => {
   const [requests, setRequests] = useState([]);
 
   useEffect(() => {
-    const makeApiCall = async () => {};
+    const makeApiCall = async () => {
+        const res = await fetch('')
+    };
   });
 
   const requestCards = requests.map((request) => {
