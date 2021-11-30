@@ -1,7 +1,27 @@
 import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
 
 const Walker = (props) => {
+    let data = {
+        ownerName: "Daniel",
+        ownerEmail: "daniel@gmail.com",
+        dogs: [
+            {name: "Mikey", breed: "Golden"},
+            {name: "Tyler", breed: "Mutt"}
+        ]
+    }
+  const handleClick = () => {
+      const makeApiCall = async () => {
+        const makeRequest = await fetch(`http://localhost:4000/walker/${props.walker._id}/addRequest`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/JSON"
+            },
+            body: JSON.stringify(data)
+        })
+      }
+  };
   return (
     <Col>
       <Card style={{ width: "25rem" }}>
@@ -11,6 +31,7 @@ const Walker = (props) => {
           <Card.Subtitle className="mb-2 text-muted">
             {props.walker.city}
           </Card.Subtitle>
+          <Button onClick={handleClick}>Request this Walker</Button>
         </Card.Body>
       </Card>
     </Col>
