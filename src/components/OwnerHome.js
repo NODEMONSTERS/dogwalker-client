@@ -13,6 +13,7 @@ const OwnerHome = (props) => {
 		name: '',
 		city: '',
 		dogs: [],
+		email: '',
 	});
 
 	const [walkerData, setWalkerData] = useState([]);
@@ -37,7 +38,7 @@ const OwnerHome = (props) => {
 		return <Dog dog={dog} setOwnerInfo={setOwnerInfo} ownerInfo={ownerInfo} />;
 	});
 	const walkerList = walkerData.map((walker) => {
-		return <Walker walker={walker} />;
+		return <Walker owner={ownerInfo} walker={walker} />;
 	});
 
 	return (

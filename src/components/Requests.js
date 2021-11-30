@@ -3,12 +3,17 @@ import Container from 'react-bootstrap/Container'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 
-const Requests = () => {
+const Requests = (props) => {
   const [requests, setRequests] = useState([]);
 
   useEffect(() => {
-    const makeApiCall = async () => {};
-  });
+    const makeApiCall = async () => {
+        const res = await fetch(`http://localhost:4000/walker/${props.walker._id}`)
+        const json = res.json();
+        console.log(json)
+    };
+    makeApiCall()
+  }, []);
 
   const requestCards = requests.map((request) => {
     return (
