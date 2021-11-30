@@ -7,6 +7,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import { useNavigate } from 'react-router';
+import './Welcome.css';
 
 const Welcome = (props) => {
 	const navigate = useNavigate();
@@ -87,7 +88,7 @@ const Welcome = (props) => {
 	};
 
 	return (
-		<Container>
+		<Container className="welcome-page">
 			<h1>Welcome to DogWalker</h1>
 			<h4>Please choose your portal to continue</h4>
 			<p>I am a...</p>
