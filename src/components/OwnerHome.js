@@ -37,7 +37,7 @@ const OwnerHome = (props) => {
   }, []);
 
   const dogListJSX = ownerInfo.dogs.map((dog) => {
-    return <Dog dog={dog} />
+    return <Dog dog={dog} setOwnerInfo={setOwnerInfo} ownerInfo={ownerInfo} />
   });
 
   const walkerList = walkerData.map((walker) => {

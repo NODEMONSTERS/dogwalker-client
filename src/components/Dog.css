@@ -1,0 +1,14 @@
+#dog-card {
+  display: flex;
+  flex-direction: row;
+}
+
+#dog-img {
+  height: 80px;
+  width: 80px;
+  border-radius: 50%;
+}
+
+#dog-card-body {
+
+}
