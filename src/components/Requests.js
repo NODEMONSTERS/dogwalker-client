@@ -5,6 +5,8 @@ import Button from 'react-bootstrap/Button'
 
 const Requests = (props) => {
   const [requests, setRequests] = useState([]);
+  const [refresh, setRefresh] = useState(0)
+  let counter = 0;
 
   useEffect(() => {
     const makeApiCall = async () => {
@@ -13,7 +15,12 @@ const Requests = (props) => {
         setRequests(json.requests)
     };
     makeApiCall()
-  });
+  }, [refresh]);
+
+  const handleClick = () => {
+    counter += 1;
+    setRefresh(counter)
+  }
 
   const requestCards = requests.map((request) => {
       const singleDog = request.dogs.map((dog) => {
@@ -40,6 +47,7 @@ const Requests = (props) => {
   return (
     <Container>
       <h1>My requestss</h1>
+      <Button onClick={handleClick}>Refresh</Button>
       {requestCards}
     </Container>
   );
