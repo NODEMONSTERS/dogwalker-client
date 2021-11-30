@@ -8,9 +8,12 @@ const Requests = (props) => {
 
   useEffect(() => {
     const makeApiCall = async () => {
-        const res = await fetch('')
+        const res = await fetch(`http://localhost:4000/walker/${props.walker._id}`)
+        const json = res.json();
+        console.log(json)
     };
-  });
+    makeApiCall()
+  }, []);
 
   const requestCards = requests.map((request) => {
     return (
