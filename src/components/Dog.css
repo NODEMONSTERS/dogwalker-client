@@ -7,6 +7,7 @@
   height: 80px;
   width: 80px;
   border-radius: 50%;
+  margin: auto 0 auto 10px
 }
 
 #dog-card-body {
