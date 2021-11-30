@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-// import { Navigate } from 'react-router-dom';
 import { useNavigate } from 'react-router';
 import { Form, Button } from 'react-bootstrap';
 
@@ -7,7 +6,7 @@ const Register = () => {
 	const navigate = useNavigate();
 
 	const ownerApiCall = 'http://localhost:4000/owner/register/';
-    const walkerApiCall = 'http://localhost:4000/walker/register/';
+	const walkerApiCall = 'http://localhost:4000/walker/register/';
 
 	// set information for the new uesr
 	const [user, setUser] = useState({
@@ -20,12 +19,12 @@ const Register = () => {
 	//set user type for api call
 	const [userType, setUserType] = useState('');
 
-	//update the user's information 
+	//update the user's information
 	const handleChange = (event) => {
 		setUser({ ...user, [event.target.name]: event.target.value });
 	};
 
-	// select dog owner or dog walker 
+	// select dog owner or dog walker
 	const onSelected = (event) => {
 		setUserType(event.target.value);
 	};
@@ -33,6 +32,7 @@ const Register = () => {
 	// submit registration
 	const handleSubmit = (event) => {
 		event.preventDefault();
+
 		// if they are an owner
 		if (userType === 'owner') {
 			fetch(ownerApiCall, {
@@ -41,40 +41,34 @@ const Register = () => {
 					'Content-Type': 'application/json',
 				},
 				body: JSON.stringify(user),
-			// }).then(() => {
-			// 	setUser({ name: '', city: '', username: '', password: '' })
-			// });
-			}).then((res) => res.json())
-			.then((data) => {
-				// console.log(data.newOwner);
-				// return <Navigate to="/owner" owner={data.newOwner} />
-				// navigate("/")
 			})
-			.catch(e => console.log(e));
-
-            console.log( "new owner created")
+				.then((res) => res.json())
+				.then((data) => {
+					console.log('new owner created');
+				})
+			navigate('/');
 		}
 		// if they are a walker
-        else if (userType === 'walker')
-        {
-            fetch(walkerApiCall, {
+		else if (userType === 'walker') {
+			fetch(walkerApiCall, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
 				},
 				body: JSON.stringify(user),
-			}).then(() =>
-				setUser({ name: '', city: '', username: '', password: '' })
-			);
-            console.log("new walker created")
+			})
+				.then((res) => res.json())
+				.then((data) => {
+					console.log('new walker created');
+				})
+				.catch((e) => console.log(e));
+			navigate('/');
 		}
-
-        navigate("/")
 	};
 
 	return (
 		<div>
-			<h1> Owner Registration</h1>
+			<h1> Registration</h1>
 			<Form onSubmit={handleSubmit}>
 				<Form.Group className='mb-3' controlId='formName'>
 					I am a....
@@ -126,6 +120,9 @@ const Register = () => {
 						value={user.email}
 						onChange={handleChange}
 					/>
+					<Form.Text className='text-muted'>
+						We'll never share your email with anyone else.
+					</Form.Text>
 				</Form.Group>
 
 				<Form.Group className='mb-3' controlId='formBasicPassword'>
