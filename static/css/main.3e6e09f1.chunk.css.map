@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://src/components/Dog.css"],"names":[],"mappings":"AAAA,UACE,YAAa,CACb,kBACF,CAEA,SACE,WAAY,CACZ,UAAW,CACX,iBACF","file":"main.3e6e09f1.chunk.css","sourcesContent":["#dog-card {\n  display: flex;\n  flex-direction: row;\n}\n\n#dog-img {\n  height: 80px;\n  width: 80px;\n  border-radius: 50%;\n}\n\n#dog-card-body {\n\n}"]}
