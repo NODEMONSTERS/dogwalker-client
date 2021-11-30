@@ -11,7 +11,7 @@ const Requests = (props) => {
 	useEffect(() => {
 		const makeApiCall = async () => {
 			const res = await fetch(
-				`https://pacific-wave-42416.herokuapp.com/walker/${props.walker._id}`
+				`https://pacific-wave-42416.herokuapp.com/walker/${props.userId}`
 			);
 			const json = res.json();
 			setRequests(json.requests);
