@@ -14,8 +14,8 @@ const Navigation = () => {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto justify-content-end">
-              <Nav.Item><Link to='/'>Home</Link></Nav.Item>
-              <Nav.Item><Link to='/team'>Meet the Team</Link></Nav.Item>
+              <Nav.Item ><Link className='nav-link' to='/'>Home</Link></Nav.Item>
+              <Nav.Item ><Link className='nav-link' to='/team'>Meet the Team</Link></Nav.Item>
             </Nav>
           </Navbar.Collapse>
         </Container>
