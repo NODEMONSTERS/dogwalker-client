@@ -2,55 +2,55 @@ import React, { useState, useEffect } from 'react';
 import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import ListGroup from 'react-bootstrap/ListGroup'
 
 const Requests = (props) => {
 	const [requests, setRequests] = useState([]);
-	const [refresh, setRefresh] = useState(0);
-	let counter = 0;
-
+    console.log(props.userId)
 	useEffect(() => {
 		const makeApiCall = async () => {
 			const res = await fetch(
 				`https://pacific-wave-42416.herokuapp.com/walker/${props.userId}`
 			);
-			const json = res.json();
-			setRequests(json.requests);
+			const json = await res.json();
+			setRequests(json.walker[0].requests)
 		};
 		makeApiCall();
-	}, [refresh]);
+	}, []);
 
-	const handleClick = () => {
-		counter += 1;
-		setRefresh(counter);
-	};
-
-	const requestCards = requests.map((request) => {
-		const singleDog = request.dogs.map((dog) => {
-			return <li>{dog.name}</li>;
-		});
-		return (
-			<Card style={{ width: '18rem' }}>
-				<Card.Img variant='top' src='holder.js/100px180' />
-				<Card.Body>
-					<Card.Title>Request!</Card.Title>
-					<Card.Text>
-						<p>Name:{request.ownerName}</p>
-						<p>Email:{request.ownerEmail}</p>
-						<ul>
-							<p>Dogs:</p>
-							{singleDog}
-						</ul>
-					</Card.Text>
-					<Button variant='primary'>Go somewhere</Button>
-				</Card.Body>
-			</Card>
-		);
-	});
 	return (
 		<Container>
-			<h1>My requestss</h1>
-			<Button onClick={handleClick}>Refresh</Button>
-			{requestCards}
+			<h1>My requests</h1>
+            <Row>
+			{requests && requests.map((request) => {
+		        const singleDog = request.dogs.map((dog) => {
+			        return <li>{dog.name}</li>;
+		        });
+		        return (
+                    <Col>
+			            <Card style={{ width: '15rem' }}>
+				            <Card.Body>
+					            <Card.Title>Request!</Card.Title>
+					            <Card.Text>
+                                    <ListGroup>
+						                <ListGroup.Item>Name: {request.ownerName}</ListGroup.Item>
+						                <ListGroup.Item>Email: {request.ownerEmail}</ListGroup.Item>
+                                        <ListGroup.Item>Dogs:
+						                    <ul>
+							                    {singleDog}
+						                    </ul>
+                                        </ListGroup.Item>
+                                    </ListGroup>
+					            </Card.Text>
+					            <Button variant='primary'>Accept Request</Button>
+				            </Card.Body>
+			            </Card>
+                    </Col>
+		        );
+	        })}
+            </Row>
 		</Container>
 	);
 };

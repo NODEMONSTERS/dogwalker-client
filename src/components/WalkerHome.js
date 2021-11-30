@@ -19,7 +19,8 @@ const WalkerHome = (props) => {
 	}, []);
 	return (
 		<Container>
-			<Button>
+            <h2>Welcome Back</h2>
+			<Button variant="light">
 				<Link to='/walker/requests'>My requests</Link>
 			</Button>
 			<Row>
