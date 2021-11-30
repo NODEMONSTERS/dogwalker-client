@@ -4,9 +4,9 @@ import Button from "react-bootstrap/Button";
 
 const Walker = (props) => {
     let data = {
-        ownerName: props.ownerInfo.name,
-        ownerEmail: props.ownerInfo.email,
-        dogs: props.ownerInfo.dogs
+        ownerName: props.owner.name,
+        ownerEmail: props.owner.email,
+        dogs: props.owner.dogs
     }
   const handleClick = () => {
       const makeApiCall = async () => {
