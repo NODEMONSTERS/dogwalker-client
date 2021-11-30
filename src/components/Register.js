@@ -44,8 +44,6 @@ const Register = () => {
 			})
 				.then((res) => res.json())
 				.then((data) => {
-					// console.log(data.newOwner);
-					// return <Navigate to="/owner" owner={data.newOwner} />
 					console.log('new owner created');
 				})
 				.catch((e) => console.log(e));
@@ -59,10 +57,13 @@ const Register = () => {
 					'Content-Type': 'application/json',
 				},
 				body: JSON.stringify(user),
-			}).then(() =>
-				setUser({ name: '', city: '', username: '', password: '' })
-			);
-			console.log('new walker created');
+			})
+				.then((res) => res.json())
+				.then((data) => {
+					console.log('new walker created');
+				})
+				.catch((e) => console.log(e));
+			navigate('/');
 		}
 	};
 

@@ -9,12 +9,12 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import { userContext } from './userContext';
 import { useNavigate } from 'react-router';
-import { propTypes } from 'react-bootstrap/esm/Image';
 
 const Welcome = (props) => {
 	const navigate = useNavigate();
 
 	const ownerLoginApiCall = 'http://localhost:4000/owner/login/';
+	const walkerLoginApiCall = 'http://localhost:4000/walker/login/';
 
 	const [user, setUser] = useState({});
 
@@ -23,40 +23,70 @@ const Welcome = (props) => {
 		password: '',
 	});
 
+	const [walker, setWalker] = useState({
+		username: '',
+		password: '',
+	});
+
 	const [redirect, setRedirect] = useState(false);
 
 	//update the user's information
 	const handleChange = (event) => {
-		setOwner({ ...owner, [event.target.name]: event.target.value });
+		if (event.target.className === 'owner form-control') {
+			setOwner({ ...owner, [event.target.name]: event.target.value });
+		} else if (event.target.className === 'walker form-control') {
+			setWalker({ ...walker, [event.target.name]: event.target.value });
+		}
 	};
 
-	console.log('user outside of submit ', user);
 	// submit login
 	const handleSubmit = (event) => {
 		event.preventDefault();
 
-		fetch(ownerLoginApiCall, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify(owner),
-		})
-			.then((res) => res.json())
-			.then((data) => {
-				console.log('data', data.user);
-
-				props.setUserId(data.user._id);
-				setRedirect(true);
-
-				navigateOwner();
+		if (owner) {
+			fetch(ownerLoginApiCall, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(owner),
 			})
-			.catch((e) => console.log(e));
+				.then((res) => res.json())
+				.then((data) => {
+					props.setUserId(data.user._id);
+					setRedirect(true);
+
+					navigateOwner();
+				})
+				.catch((e) => console.log(e));
+		} else if (walker) {
+			fetch(walkerLoginApiCall, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(walker),
+			})
+				.then((res) => res.json())
+				.then((data) => {
+					console.log('data', data.user);
+
+					props.setUserId(data.user._id);
+					setRedirect(true);
+
+					navigateOwner();
+				})
+				.catch((e) => console.log(e));
+		}
 	};
 
 	const navigateOwner = () => {
 		if (redirect) {
-			navigate('/owner');
+			if (owner) {
+				navigate('/owner');
+			} else {
+				navigate('/walker');
+			}
 		}
 	};
 
@@ -76,6 +106,7 @@ const Welcome = (props) => {
 									<Form.Control
 										type='email'
 										name='username'
+										className='owner'
 										value={owner.username}
 										placeholder='Enter email'
 										onChange={handleChange}
@@ -87,6 +118,7 @@ const Welcome = (props) => {
 									<Form.Control
 										type='password'
 										name='password'
+										className='owner'
 										value={owner.password}
 										placeholder='Password'
 										onChange={handleChange}
@@ -117,15 +149,32 @@ const Welcome = (props) => {
 							<Form>
 								<Form.Group className='mb-3' controlId='formBasicEmail'>
 									<Form.Label>Email address</Form.Label>
-									<Form.Control type='email' placeholder='Enter email' />
+									<Form.Control
+										type='email'
+										name='username'
+										className='walker'
+										value={walker.username}
+										placeholder='Enter email'
+										onChange={handleChange}
+									/>
 								</Form.Group>
 
 								<Form.Group className='mb-3' controlId='formBasicPassword'>
 									<Form.Label>Password</Form.Label>
-									<Form.Control type='password' placeholder='Password' />
+									<Form.Control
+										type='password'
+										name='password'
+										className='walker'
+										value={walker.password}
+										placeholder='Password'
+										onChange={handleChange}
+									/>
 								</Form.Group>
 								<Form.Group className='mb-3' controlId='formLogin'>
-									<Button variant='primary' type='submit'>
+									<Button
+										variant='primary'
+										type='submit'
+										onClick={handleSubmit}>
 										Log In
 									</Button>
 								</Form.Group>
