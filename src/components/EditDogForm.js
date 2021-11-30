@@ -62,7 +62,7 @@ const EditDogForm = (props) => {
         keyboard={false}
       >
         <Modal.Header closeButton>
-          <Modal.Title>Add a dog</Modal.Title>
+          <Modal.Title>Edit {props.dog.name}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={handleSubmit}>
