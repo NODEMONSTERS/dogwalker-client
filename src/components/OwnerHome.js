@@ -2,14 +2,11 @@ import React, { useState, useEffect } from 'react';
 import Dog from './Dog';
 import Walker from './Walker';
 import AddDogForm from './AddDogForm';
-
 import Container from 'react-bootstrap/Container';
-import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 
 const OwnerHome = (props) => {
-	console.log(props);
-	// Temp id. Will need to pass props.id from login page
+
 	const userId = props.userId;
 
 	const [ownerInfo, setOwnerInfo] = useState({
@@ -46,9 +43,8 @@ const OwnerHome = (props) => {
 	return (
 		<Container>
 			<h1>Owner homepage</h1>
-			<h2> Hello {ownerInfo.name}</h2>
-			<div>
-				<h2>{ownerInfo.name}</h2>
+				<div>
+				<h2>Hello {ownerInfo.name}</h2>
 				<h4>{ownerInfo.city}</h4>
 			</div>
 			<Container>
