@@ -5,8 +5,10 @@ import { Form, Button } from 'react-bootstrap';
 const Register = () => {
 	const navigate = useNavigate();
 
-	const ownerApiCall = 'http://localhost:4000/owner/register/';
-	const walkerApiCall = 'http://localhost:4000/walker/register/';
+	const ownerApiCall =
+		'https://pacific-wave-42416.herokuapp.com/owner/register/';
+	const walkerApiCall =
+		'https://pacific-wave-42416.herokuapp.com/walker/register/';
 
 	// set information for the new uesr
 	const [user, setUser] = useState({
