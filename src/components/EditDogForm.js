@@ -3,16 +3,9 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 
-const AddDogForm = (props) => {
+const EditDogForm = (props) => {
   const [show, setShow] = useState(false);
-  const [inputVal, setInputVal] = useState({
-    name: '',
-    breed: '',
-    age: '',
-    picture: '',
-    personality: '',
-    walkLengths: '',
-  })
+  const [inputVal, setInputVal] = useState(props.dog)
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -21,34 +14,38 @@ const AddDogForm = (props) => {
     setInputVal({ ...inputVal, [e.target.name]: e.target.value});
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    fetch('http://localhost:4000/dog', {
-      method: 'POST',
+  const handleDelete = () => {
+    fetch(`http://localhost:4000/dog/${inputVal._id}`, {
+      method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(inputVal),
+      body: JSON.stringify({ id: props.ownerInfo._id }),
     })
     .then((res) => res.json())
     .then((data) => {
-      console.log(data.newDog._id);
+      console.log('response data:', data.owner)
 
-      fetch(`http://localhost:4000/owner/${props.userId}/addDog`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({id: data.newDog._id})
-      })
-      .then((res) => res.json())
-      .then((owner) => {
-        console.log(owner.data);
-        props.setOwnerInfo(owner.data);
-        handleClose();
-      })
-      .catch(e => console.log(e));
+      props.setOwnerInfo(data.owner);
+      handleClose();
+    })
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    fetch(`http://localhost:4000/dog/${inputVal._id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ dog: inputVal, ownerId: props.ownerInfo._id }),
+    })
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data.owner);
+      props.setOwnerInfo(data.owner);
+      handleClose();
     })
     .catch(e => console.log(e))
 
@@ -56,9 +53,7 @@ const AddDogForm = (props) => {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
-        Add a Dog
-      </Button>
+      <Button variant="primary" onClick={handleShow}>Edit</Button>
 
       <Modal
         show={show}
@@ -101,9 +96,9 @@ const AddDogForm = (props) => {
               <Form.Control type="text" name='walkLengths' value={inputVal.walkLengths} onChange={handleInputChange} placeholder="How long of a walk does your dog prefer" />
             </Form.Group>
           
-            <Button variant="primary" type="submit">
-              Submit
-            </Button>
+            <Button variant="primary" type="submit">Submit</Button>
+          
+            <Button variant="danger" type="button" onClick={handleDelete}>Delete</Button>
           </Form>
         </Modal.Body>
       </Modal>
@@ -111,4 +106,4 @@ const AddDogForm = (props) => {
   );
 }
 
-export default AddDogForm;
+export default EditDogForm;
