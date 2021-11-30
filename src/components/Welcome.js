@@ -1,13 +1,11 @@
-import { useState, useContext } from 'react';
+import { useState} from 'react';
 import { Link } from 'react-router-dom';
-
 import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
-import { userContext } from './userContext';
 import { useNavigate } from 'react-router';
 
 const Welcome = (props) => {
@@ -15,8 +13,6 @@ const Welcome = (props) => {
 
 	const ownerLoginApiCall = 'http://localhost:4000/owner/login/';
 	const walkerLoginApiCall = 'http://localhost:4000/walker/login/';
-
-	const [user, setUser] = useState({});
 
 	const [owner, setOwner] = useState({
 		username: '',
@@ -43,7 +39,7 @@ const Welcome = (props) => {
 	const handleSubmit = (event) => {
 		event.preventDefault();
 
-		if (owner) {
+		if (owner.password.length > 1) {
 			fetch(ownerLoginApiCall, {
 				method: 'POST',
 				headers: {
@@ -82,7 +78,7 @@ const Welcome = (props) => {
 
 	const navigateOwner = () => {
 		if (redirect) {
-			if (owner) {
+			if (owner.password.length > 1) {
 				navigate('/owner');
 			} else {
 				navigate('/walker');

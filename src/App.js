@@ -25,8 +25,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Welcome setUserId={setUserId}/>} />
         <Route path="/owner" element={<OwnerHome userId={userId}/>} />
-        <Route path="/walker" element={<WalkerHome />} />
-		<Route path="/walker/requests" element={<Requests />} />
+        <Route path="/walker" element={<WalkerHome userId={userId}/>} />
+		<Route path="/walker/requests" element={<Requests userId={userId}/>} />
         <Route path="/register" element={<Register />} />
         <Route path="/team" element={<Team />} />
       </Routes>
