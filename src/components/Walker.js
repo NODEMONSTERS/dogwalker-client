@@ -13,13 +13,16 @@ const Walker = (props) => {
     }
   const handleClick = () => {
       const makeApiCall = async () => {
-        const makeRequest = await fetch(`http://localhost:4000/walker/${props.walker._id}/addRequest`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/JSON"
-            },
-            body: JSON.stringify(data)
-        })
+        const makeRequest = await fetch(
+					`https://pacific-wave-42416.herokuapp.com/walker/${props.walker._id}/addRequest`,
+					{
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/JSON',
+						},
+						body: JSON.stringify(data),
+					}
+				);
       }
   };
   return (

@@ -15,39 +15,39 @@ const EditDogForm = (props) => {
   }
 
   const handleDelete = () => {
-    fetch(`http://localhost:4000/dog/${inputVal._id}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ id: props.ownerInfo._id }),
-    })
-    .then((res) => res.json())
-    .then((data) => {
-      console.log('response data:', data.owner)
+    fetch(`https://pacific-wave-42416.herokuapp.com/${inputVal._id}`, {
+			method: 'DELETE',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({ id: props.ownerInfo._id }),
+		})
+			.then((res) => res.json())
+			.then((data) => {
+				console.log('response data:', data.owner);
 
-      props.setOwnerInfo(data.owner);
-      handleClose();
-    })
+				props.setOwnerInfo(data.owner);
+				handleClose();
+			});
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch(`http://localhost:4000/dog/${inputVal._id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ dog: inputVal, ownerId: props.ownerInfo._id }),
-    })
-    .then((res) => res.json())
-    .then((data) => {
-      console.log(data.owner);
-      props.setOwnerInfo(data.owner);
-      handleClose();
-    })
-    .catch(e => console.log(e))
+    fetch(`https://pacific-wave-42416.herokuapp.com/${inputVal._id}`, {
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({ dog: inputVal, ownerId: props.ownerInfo._id }),
+		})
+			.then((res) => res.json())
+			.then((data) => {
+				console.log(data.owner);
+				props.setOwnerInfo(data.owner);
+				handleClose();
+			})
+			.catch((e) => console.log(e));
 
   }
 

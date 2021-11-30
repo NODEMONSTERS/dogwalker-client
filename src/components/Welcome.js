@@ -11,8 +11,8 @@ import { useNavigate } from 'react-router';
 const Welcome = (props) => {
 	const navigate = useNavigate();
 
-	const ownerLoginApiCall = 'http://localhost:4000/owner/login/';
-	const walkerLoginApiCall = 'http://localhost:4000/walker/login/';
+	const ownerLoginApiCall = 'https://pacific-wave-42416.herokuapp.com/owner/login/';
+	const walkerLoginApiCall = 'https://pacific-wave-42416.herokuapp.com/walker/login/';
 
 	const [owner, setOwner] = useState({
 		username: '',

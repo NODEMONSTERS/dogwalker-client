@@ -11,7 +11,7 @@ const WalkerHome = (props) => {
 
 	useEffect(() => {
 		const makeApiCall = async () => {
-			const res = await fetch('http://localhost:4000/dog');
+			const res = await fetch('https://pacific-wave-42416.herokuapp.com/dog');
 			const json = await res.json();
 			setDogs(json.data);
 		};

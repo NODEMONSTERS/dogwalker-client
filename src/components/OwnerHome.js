@@ -18,13 +18,13 @@ const OwnerHome = (props) => {
 	const [walkerData, setWalkerData] = useState([]);
 
 	useEffect(() => {
-		fetch(`http://localhost:4000/owner/${userId}`)
+		fetch(`https://pacific-wave-42416.herokuapp.com/owner/${userId}`)
 			.then((response) => response.json())
 			.then((data) => {
 				setOwnerInfo(data.owner);
 			})
 			.then(() => {
-				fetch(`http://localhost:4000/walker`)
+				fetch(`https://pacific-wave-42416.herokuapp.com/walker`)
 					.then((response) => response.json())
 					.then((data) => {
 						setWalkerData(data.allWalkers);
