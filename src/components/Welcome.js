@@ -1,4 +1,4 @@
-import { useState , useContext} from 'react';
+import { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import Container from 'react-bootstrap/Container';
@@ -8,46 +8,56 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import { userContext } from './userContext';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
+import { propTypes } from 'react-bootstrap/esm/Image';
 
+const Welcome = (props) => {
+	const navigate = useNavigate();
 
-const Welcome = () => {
+	const ownerLoginApiCall = 'http://localhost:4000/owner/login/';
 
-  const ownerLoginApiCall = 'http://localhost:4000/owner/login/';
-  
-  const [user, setUser] = useState({});
+	const [user, setUser] = useState({});
 
 	const [owner, setOwner] = useState({
 		username: '',
 		password: '',
 	});
 
-	 console.log(user)
+	const [redirect, setRedirect] = useState(false);
+
 	//update the user's information
 	const handleChange = (event) => {
 		setOwner({ ...owner, [event.target.name]: event.target.value });
 	};
 
+	console.log('user outside of submit ', user);
 	// submit login
 	const handleSubmit = (event) => {
 		event.preventDefault();
-			
-			fetch(ownerLoginApiCall, {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify(owner),
+
+		fetch(ownerLoginApiCall, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(owner),
+		})
+			.then((res) => res.json())
+			.then((data) => {
+				console.log('data', data.user);
+
+				props.setUserId(data.user._id);
+				setRedirect(true);
+
+				navigateOwner();
 			})
-				.then((res) => res.json())
-				.then((data) => {
-					console.log(data);
-					setUser(data);
-					
-					<Navigate to='/owner' />
-				})
-				.catch((e) => console.log(e));		
-	
+			.catch((e) => console.log(e));
+	};
+
+	const navigateOwner = () => {
+		if (redirect) {
+			navigate('/owner');
+		}
 	};
 
 	return (
@@ -68,7 +78,7 @@ const Welcome = () => {
 										name='username'
 										value={owner.username}
 										placeholder='Enter email'
-                    onChange={handleChange}
+										onChange={handleChange}
 									/>
 								</Form.Group>
 
@@ -79,12 +89,15 @@ const Welcome = () => {
 										name='password'
 										value={owner.password}
 										placeholder='Password'
-                    onChange={handleChange}
+										onChange={handleChange}
 									/>
 								</Form.Group>
 
 								<Form.Group className='mb-3' controlId='formLogin'>
-									<Button variant='primary' type='submit' onClick={handleSubmit}>
+									<Button
+										variant='primary'
+										type='submit'
+										onClick={handleSubmit}>
 										Log In
 									</Button>
 								</Form.Group>

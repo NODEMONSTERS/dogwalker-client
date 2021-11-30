@@ -13,19 +13,19 @@ import "./App.css";
 import Container from "react-bootstrap/Container";
 
 function App() {
-  const [username, setUsername] = useState()
+  const [userId, setUserId] = useState({})
 
   return (
 		<div className='App'>
 			<header>
-				<Navigation setUsername={setUsername} />
+				<Navigation setUserId={setUserId} />
 			</header>
 			{/* <Welcome /> */}
 			<Routes>
-				<Route path='/' element={<Welcome />}>
+				<Route path='/' element={<Welcome setUserId={setUserId}/>}>
 					{/* <Route path='/edit' element={<Edit />} /> */}
 				</Route>
-				<Route path='/owner' element={<OwnerHome />}>
+				<Route path='/owner' element={<OwnerHome userId={userId}/>}>
 					{/* <Route path='/edit' element={<Edit />} /> */}
 				</Route>
 				<Route path='/walker' element={<WalkerHome />}>

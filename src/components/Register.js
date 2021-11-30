@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import { Navigate } from 'react-router-dom';
 import { useNavigate } from 'react-router';
 import { Form, Button } from 'react-bootstrap';
 
 const Register = () => {
-    const navigate = useNavigate();
+	const navigate = useNavigate();
 
 	const ownerApiCall = 'http://localhost:4000/owner/register/';
-    const walkerApiCall = 'http://localhost:4000/walker/register/';
+	const walkerApiCall = 'http://localhost:4000/walker/register/';
 
 	// set information for the new uesr
 	const [user, setUser] = useState({
@@ -20,48 +19,41 @@ const Register = () => {
 	//set user type for api call
 	const [userType, setUserType] = useState('');
 
-	//update the user's information 
+	//update the user's information
 	const handleChange = (event) => {
 		setUser({ ...user, [event.target.name]: event.target.value });
 	};
 
-	// select dog owner or dog walker 
+	// select dog owner or dog walker
 	const onSelected = (event) => {
 		setUserType(event.target.value);
 	};
 
 	// submit registration
 	const handleSubmit = (event) => {
-
 		event.preventDefault();
 
-	
 		// if they are an owner
 		if (userType === 'owner') {
 			fetch(ownerApiCall, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
-					
 				},
 				body: JSON.stringify(user),
-			// }).then(() => {
-			// 	setUser({ name: '', city: '', username: '', password: '' })
-			// });
-			}).then((res) => res.json())
-			.then((data) => {
-				// console.log(data.newOwner);
-				// return <Navigate to="/owner" owner={data.newOwner} />
-				<Navigate to='/' />
 			})
-			.catch(e => console.log(e));
-
-            console.log( "new owner created")
+				.then((res) => res.json())
+				.then((data) => {
+					// console.log(data.newOwner);
+					// return <Navigate to="/owner" owner={data.newOwner} />
+					console.log('new owner created');
+				})
+				.catch((e) => console.log(e));
+			navigate('/');
 		}
 		// if they are a walker
-        else if (userType === 'walker')
-        {
-            fetch(walkerApiCall, {
+		else if (userType === 'walker') {
+			fetch(walkerApiCall, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
@@ -70,10 +62,8 @@ const Register = () => {
 			}).then(() =>
 				setUser({ name: '', city: '', username: '', password: '' })
 			);
-            console.log("new walker created")
+			console.log('new walker created');
 		}
-
-        
 	};
 
 	return (
