@@ -66,7 +66,7 @@ const Team = () => {
 			<Row>
 				<Col>
 					<Card className={'team-cards'} style={{ width: '30rem' }}>
-						<img className={'team-pics'} src={jay} alt={'Jay'} />
+						<img className={'team-pics'} src={null} alt={'Jay'} />
 						{/* <Card.Img variant="left" src="holder.js/100px180?text=Image cap" /> */}
 						<Card.Body>
 							<Card.Title>Jay Nguyen</Card.Title>
