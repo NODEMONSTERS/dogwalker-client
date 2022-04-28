@@ -1,0 +1,9 @@
+.welcome-page {
+  /* width: 100%; */
+  height: 100vh;
+  /* margin: 0;
+  padding: 0; */
+  background-image: url("https://media-cldnry.s-nbcnews.com/image/upload/newscms/2020_28/1587661/dogs-age-years-kb-inline-200707.jpg");
+  background-size: cover;
+  background-position: center;
+}
