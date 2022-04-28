@@ -8,6 +8,8 @@ import Col from 'react-bootstrap/Col';
 
 import './Team.css';
 
+import './Team.css';
+
 const Team = () => {
 	return (
 		<Container>
